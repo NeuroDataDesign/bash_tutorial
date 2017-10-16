@@ -4,6 +4,17 @@ In this tutorial, we will cover some introductory bash commands that will be of 
 
 ## Basics
 
+### pwd
+
+`pwd` will return for you the current directory you are in. For example:
+
+```
+$ pwd
+/home/eric
+```
+
+Where `/home/eric` is the directory I was currently in when I ran that script.
+
 ### ls
 
 The `ls` command lists the contents of a given directory. It can be used as follows:
@@ -359,6 +370,28 @@ find <src/path> [args]
 
 #### Nohup
 
+Run a command in the background as follows:
+
+```
+nohup <my command> &
+```
+
+For example, to run the python script, "example.py" with input arguments for "n1", we would run as follows:
+
+```
+nohup python example.py n1 &
+```
+
+nohup puts the command to the background, and the `&` means to ignore output from the command. Note that the nohup command spits back the process id, which you can later use to kill the process if need be later. 
+
+If you are using bash and want to save the process id as a variable for `<my command>`, it can be done as follows:
+
+```
+nohup <my command> &
+pid=$!
+```
+
+`$!` essentially is an intermediate that holds the process information for the preceding line in `bash`.
 ##### Terminating a process
 
 ###### Pkill
@@ -380,25 +413,64 @@ and RStudio will be killed.
 
 ###### Kill
 
-#### Screen
+To kill a process given the process id (from nohup, or by crossreferencing from `ps`):
+
+```
+kill <pid>
+```
 
 ## Shell-Scripts
 
+A shell-script, or bash-script, is a program written in the language of your terminal session.
+
 ### She-bang
+
+A shebang tells the interpreter what language to use for a script to be run. This allows users to 
 
 ### Variable Declaration
 
+Variables in bash are declared as follows:
+
+```
+variable1=<something>
+```
+
+where `<something>` can be a string, integer, filepath, etc.
+
 #### Saving the output of a command as a variable
 
-#### Saving the process ID of a process run in the background
+From within a bash script, you can save the output of a command-line command as follows:
+
+```
+information=$(<command>)
+```
+
+For example, to get the current directory you are in from within a shell-script, you could do it as follows:
+
+```
+current_dir=$(pwd)
+```
 
 ### Command Line Arguments
 
-### For-loops
+In a `bash`-script, command line arguments are passed as follows. If your command was run as:
 
-### While-loops
+```
+./my_script.sh <arg1> <arg2> <arg3> ...
+```
 
-### Sleep Command
+You can access these arguments within your script very simply:
+
+```
+# note this is within your bash script!
+
+arg1=$1
+arg2=$2
+arg3=$3
+...
+```
+
+and the arguments will be saved as strings.
 
 ## Exercise
 
@@ -424,4 +496,4 @@ python gen_and_plot_random_matrix.py <n> <t> </path/to/output>
 </path/to/output>: the path to place the output png images
 ```
 
-+ Within the bash script, you should call 3 external scripts `disklog.sh`, `memlog.sh`, and `proclog.sh` and run them in the background before calling your above `gen_and_plot_random_matrix.py`. These scripts will, on each line, log the usage of memory, processor, and disk space every second in the background while the remainder of your script executes. Then, call your `gen_and_plot_random_matrix.py` from within your bash script to produce your figure. Finally, terminate each of the jobs you started in the background at the end of your shell script. 
++ Within your bash script, you should call your above `gen_and_plot_random_matrix.py`. Skeleton code will be provided.
