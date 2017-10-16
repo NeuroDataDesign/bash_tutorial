@@ -479,10 +479,10 @@ Now, it is time for you guys to attempt to code up an  example to test your know
 1) write a python script with the following API:
 
 ```
-python gen_and_plot_random_matrix.py <n> <t> </path/to/output>
+python gen_and_plot_random_matrix.py <n> <t> </path/to/output.png>
 <n>: the number of observations for a random timeseries
 <t>: the number of timesteps for a random timeseries
-</path/to/output>: the path to place the output png images
+</path/to/output>: the path to place the output png image
 ```
 
 + the python script should simulate a random timeseries, plot the timeseries using plotly, and then save the timeseries as a png image, following a process similar to what we do [here](https://github.com/NeuroDataDesign/jupyter_tutorial). Note that we do not plot the timeseries as a png image in this notebook, but you should be able to get some intuition from [here](https://plot.ly/python/static-image-export/) about how that might work.
@@ -490,10 +490,12 @@ python gen_and_plot_random_matrix.py <n> <t> </path/to/output>
 2) Write a bash script with the following API:
 
 ```
-./analyze_gen_and_plot_random_matrix.sh <n> <t> </path/to/output>
+./analyze_gen_and_plot_random_matrix.sh <n> <t> </path/to/output.png>
 <n>: the number of observations for a random timeseries
 <t>: the number of timesteps for a random timeseries
-</path/to/output>: the path to place the output png images
+</path/to/output>: the path to place the output png image
 ```
 
-+ Within your bash script, you should call your above `gen_and_plot_random_matrix.py`. Skeleton code will be provided.
++ Within your bash script, you should call your above `gen_and_plot_random_matrix.py`. Skeleton code will be provided [bash skeleton code](https://github.com/NeuroDataDesign/bash_tutorial/blob/master/gen_and_plot_random_mtx.sh) and [python skeleton code](https://github.com/NeuroDataDesign/bash_tutorial/blob/master/gen_and_plot_random_matrix.py). You should begin by downloading these two files, and then running the script with both in the same folder to test. 
+
+For reference, the above assignment is known as a `wrapper function`. This means that we have an existing program in one language that we may want to be generalized to another language without reimplementing the entire script. This is useful, for instance, if we want to use a particular library (such as `plotly` in this case) that we cannot access from the language we are using to wrap (in this case `bash`).  This procedure is extremely common in data science.
